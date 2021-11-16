@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">CalorieTracker</string>
+    <string name="calorie_crunch">Calorie Crunch</string>
+    <string name="calories_tracker_app">Calories Tracker App</string>
+    <string name="get_started">Get Started</string>
+    <string name="what_s_your_current_weight">What\'s your current weight?</string>
+    <string name="kgs">kgs</string>
+    <string name="next">Next</string>
+    <string name="what_s_your_target_weight">What\'s your target weight?</string>
+    <string name="enter_your_personal_data">Enter your personal data</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="email">Email</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="what_s_your_activity_level">What\'s your activity level?</string>
 </resources>
