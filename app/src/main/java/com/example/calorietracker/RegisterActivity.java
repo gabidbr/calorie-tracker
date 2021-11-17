@@ -15,51 +15,52 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
-public class LoginActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
+
     private EditText email, password;
-    private Button login;
+    private Button register;
 
     private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_register);
 
-        email = findViewById(R.id.loginEmail);
-        password = findViewById(R.id.loginPassword);
-        login = findViewById(R.id.login);
+        email = findViewById(R.id.email);
+        password = findViewById(R.id.password);
+        register = findViewById(R.id.register);
 
         mAuth = FirebaseAuth.getInstance();
 
-        login.setOnClickListener(new View.OnClickListener() {
+        register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String txt_email = email.getText().toString();
                 String txt_password = password.getText().toString();
                 if (TextUtils.isEmpty(txt_email) || TextUtils.isEmpty(txt_password)) {
-                    Toast.makeText(LoginActivity.this, "Empty credentials!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "Empty credentials!", Toast.LENGTH_SHORT).show();
+                } else if (txt_password.length() < 6) {
+                    Toast.makeText(RegisterActivity.this, "Password too short! ", Toast.LENGTH_SHORT).show();
                 } else {
-                    loginUser(txt_email, txt_password);
+                    registerUser(txt_email, txt_password);
                 }
             }
         });
+
     }
 
-    private void loginUser(String txt_email, String txt_password) {
-        mAuth.signInWithEmailAndPassword(txt_email, txt_password).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+    private void registerUser(String txt_email, String txt_password) {
+        mAuth.createUserWithEmailAndPassword(txt_email, txt_password).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    Toast.makeText(LoginActivity.this, "Login successfully!", Toast.LENGTH_SHORT).show();
-                    FirebaseUser user = mAuth.getCurrentUser();
-                    //TODO Sa afisez informatia pe dashboard in functie de User
-                    startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
-                    //updateUI(user);
+                    Toast.makeText(RegisterActivity.this, "Registering user successfully!", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(RegisterActivity.this, PersonalDataActivity.class));
+                    finish();
                 } else {
-                    Toast.makeText(LoginActivity.this, "Login failed!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "Registering user failed!", Toast.LENGTH_SHORT).show();
                 }
             }
         });

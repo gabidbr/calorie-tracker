@@ -10,6 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CalorieTracker">
         <activity
+            android:name=".DashboardActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".StartActivity"
+            android:exported="false" />
+        <activity
             android:name=".ExerciseLevelActivity"
             android:exported="false" />
         <activity
@@ -22,7 +34,7 @@
             android:name=".CurrentWeightActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".FirstPageActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

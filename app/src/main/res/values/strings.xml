@@ -14,4 +14,12 @@
     <string name="male">Male</string>
     <string name="female">Female</string>
     <string name="what_s_your_activity_level">What\'s your activity level?</string>
+    <string name="just_a_few_steps_left_to_get_your_personal_diet_plan">Just a few steps left to get your personal diet plan.</string>
+    <string name="i_am_new_to_calorie_crunch">I am new to Calorie Crunch</string>
+    <string name="i_already_have_an_account">I already have an account</string>
+    <string name="password">Password</string>
+    <string name="register_to_calorie_crunch">Register to Calorie Crunch</string>
+    <string name="login_to_calorie_crunch">Login to Calorie Crunch</string>
+    <string name="welcome_to_dashboard">Welcome to DashBoard!</string>
+    <string name="logout">Logout</string>
 </resources>
