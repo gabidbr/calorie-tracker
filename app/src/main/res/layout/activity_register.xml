@@ -31,5 +31,19 @@
         android:layout_marginTop="100dp"
         android:backgroundTint="@color/background_blue_color"
         android:text="@string/register_to_calorie_crunch" />
+    <TextView
+        android:id="@+id/orText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/or"
+        android:layout_below="@id/register"
+        android:layout_marginTop="20dp"/>
+    <com.shobhitpuri.custombuttons.GoogleSignInButton
+        android:id="@+id/googleSignInButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/orText"
+        android:layout_marginTop="20dp"/>
 
 </RelativeLayout>

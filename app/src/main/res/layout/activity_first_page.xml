@@ -82,6 +82,7 @@
         android:clickable="true"
         android:text="@string/get_started"
         android:textSize="20sp"
+        android:onClick="openPersonalDataActivityOnClick"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio=""
