@@ -41,12 +41,6 @@ public class RegisterActivity extends AppCompatActivity {
     private FirebaseFirestore fStore;
     private GoogleSignInClient mGoogleSignInClient;
 
-    private void startNewIntent(Activity activity) {
-        Intent intent = new Intent(RegisterActivity.this, activity.getClass());
-        startActivity(intent);
-        finish();
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

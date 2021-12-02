@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.calorietracker.food.FoodListActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class DashboardActivity extends AppCompatActivity {
@@ -27,5 +28,9 @@ public class DashboardActivity extends AppCompatActivity {
                 startActivity(new Intent(DashboardActivity.this, FirstPageActivity.class));
             }
         });
+    }
+
+    public void onListOfFoodsClick(View view) {
+        startActivity(new Intent(DashboardActivity.this, FoodListActivity.class));
     }
 }
