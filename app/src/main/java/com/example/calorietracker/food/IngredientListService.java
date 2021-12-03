@@ -2,8 +2,9 @@ package com.example.calorietracker.food;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Query;
 
 public interface IngredientListService {
-    @GET("search?query=cal&number=5&apiKey=7f44089524134491ae3b67763196e607")
-    Call<IngredientListResponse> getIngredientsList();
+    @GET("search")
+    Call<IngredientListResponse> getIngredientsList(@Query("query") String ingredientName, @Query("number") String number, @Query("apiKey") String apiKey);
 }

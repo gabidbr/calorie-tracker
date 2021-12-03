@@ -12,7 +12,10 @@ public class ApiClient {
     }
 
     public static IngredientListService getIngredientService() {
-        IngredientListService ingredientService = getRetrofit().create(IngredientListService.class);
-        return ingredientService;
+        return getRetrofit().create(IngredientListService.class);
+    }
+
+    public static IngredientInfoService getIngredientInformation(){
+        return getRetrofit().create(IngredientInfoService.class);
     }
 }

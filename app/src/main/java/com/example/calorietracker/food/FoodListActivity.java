@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,9 +21,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class FoodListActivity extends AppCompatActivity {
+    private final static String NUMBER = "3";
+    private final static String API_KEY = "7f44089524134491ae3b67763196e607";
     RecyclerView recyclerView;
     EditText searchFoodEditText;
     ImageView searchFoodIcon;
+    CardView cardView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +41,7 @@ public class FoodListActivity extends AppCompatActivity {
                 if (searchFoodEditText.getText() == null) {
                     Toast.makeText(FoodListActivity.this, "Please insert the food name", Toast.LENGTH_SHORT).show();
                 } else {
-                    Call<IngredientListResponse> ingredientList = ApiClient.getIngredientService().getIngredientsList();
+                    Call<IngredientListResponse> ingredientList = ApiClient.getIngredientService().getIngredientsList(searchFoodEditText.getText().toString(), NUMBER, API_KEY);
 
                     ingredientList.enqueue(new Callback<IngredientListResponse>() {
                         @Override
@@ -45,7 +49,7 @@ public class FoodListActivity extends AppCompatActivity {
                             if (response.isSuccessful()) {
                                 try {
                                     IngredientsAdapter ingredientsAdapter = new IngredientsAdapter(FoodListActivity.this, response.body());
-                                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(FoodListActivity.this, LinearLayoutManager.VERTICAL, false);
+                                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(FoodListActivity.this);
 
                                     recyclerView.setLayoutManager(linearLayoutManager);
                                     recyclerView.setAdapter(ingredientsAdapter);
