@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CalorieTracker">
         <activity
+            android:name=".AboutActivity"
+            android:exported="false" />
+        <activity
             android:name=".HeightActivity"
             android:exported="false" />
         <activity
@@ -52,8 +55,7 @@
             android:exported="false" />
         <activity
             android:name=".FirstPageActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".MainActivity"
             android:exported="true">

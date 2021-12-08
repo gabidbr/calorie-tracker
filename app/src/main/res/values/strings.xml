@@ -32,4 +32,8 @@
     <string name="today">Today</string>
     <string name="what_s_your_height">What\'s your height?</string>
     <string name="cm">cm</string>
+    <string name="go_to_starting_page">Go to starting page</string>
+    <string name="add_ingredient">Add Ingredient</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

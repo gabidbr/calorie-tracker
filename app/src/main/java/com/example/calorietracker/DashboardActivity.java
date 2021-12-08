@@ -23,9 +23,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DashboardActivity extends AppCompatActivity {
-    private Button logout;
     FirebaseFirestore fStore;
     FirebaseAuth mAuth;
+    private Button logout;
     private String targetCalories;
 
     @Override
@@ -35,13 +35,13 @@ public class DashboardActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
 
-        if(mAuth.getCurrentUser()!=null){
+        if (mAuth.getCurrentUser() != null) {
             DocumentReference documentReference = fStore.collection("users").document(mAuth.getCurrentUser().getUid());
             documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                    if(task.isSuccessful()){
-                        try{
+                    if (task.isSuccessful()) {
+                        try {
                             DocumentSnapshot documentSnapshot = task.getResult();
                             Object currentWeight = documentSnapshot.get("currentWeight");
                             Object targetWeight = documentSnapshot.get("targetWeight");
@@ -58,11 +58,11 @@ public class DashboardActivity extends AppCompatActivity {
                                     Toast.makeText(DashboardActivity.this, "Target Calories added for user", Toast.LENGTH_SHORT).show();
                                 }
                             });
-                        }catch (Exception e){
-                            Log.e("Dash","get failed" + e.getMessage());
+                        } catch (Exception e) {
+                            Log.e("Dash", "get failed" + e.getMessage());
                         }
 
-                    }else{
+                    } else {
                         Log.e("DashboardActivity", "get failed with", task.getException());
                     }
                 }
@@ -83,8 +83,8 @@ public class DashboardActivity extends AppCompatActivity {
 
     private int getTargetCalories(Object currentWeight, Object targetWeight, Object age, double activityLevel, Object height) {
         return (int) (((10 * Float.parseFloat(currentWeight.toString())
-                        + 6.25 * Float.parseFloat(height.toString())
-                        - 5 * Float.parseFloat(age.toString()) + 5)) * differenceIndex(currentWeight, targetWeight) * activityLevel);
+                + 6.25 * Float.parseFloat(height.toString())
+                - 5 * Float.parseFloat(age.toString()) + 5)) * differenceIndex(currentWeight, targetWeight) * activityLevel);
     }
 
     private double getActivityLevel(DocumentSnapshot documentSnapshot) {
@@ -111,12 +111,12 @@ public class DashboardActivity extends AppCompatActivity {
     private double differenceIndex(Object currentWeight, Object targetWeight) {
         double cw = Float.parseFloat(currentWeight.toString());
         double tw = Float.parseFloat(targetWeight.toString());
-        if((tw-cw)>=0 && (tw-cw)<5) return 1.1;
-        if((tw-cw)>=5 && (tw-cw)<8) return 1.15;
-        if((tw-cw)>=8) return 1.2;
-        if((tw-cw)<0 && (tw-cw)>=-5) return 0.95;
-        if((tw-cw)<-5 && (tw-cw)>=-8) return 0.9;
-        if((tw-cw)<-8) return 0.85;
+        if ((tw - cw) >= 0 && (tw - cw) < 5) return 1.1;
+        if ((tw - cw) >= 5 && (tw - cw) < 8) return 1.15;
+        if ((tw - cw) >= 8) return 1.2;
+        if ((tw - cw) < 0 && (tw - cw) >= -5) return 0.95;
+        if ((tw - cw) < -5 && (tw - cw) >= -8) return 0.9;
+        if ((tw - cw) < -8) return 0.85;
         return 1;
     }
 
@@ -126,5 +126,9 @@ public class DashboardActivity extends AppCompatActivity {
 
     public void onTrackMealsClick(View view) {
         startActivity(new Intent(DashboardActivity.this, FoodListActivity.class));
+    }
+
+    public void aboutYouOnClick(View view) {
+        startActivity(new Intent(DashboardActivity.this, AboutActivity.class));
     }
 }

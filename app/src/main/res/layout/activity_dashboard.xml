@@ -151,6 +151,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="150dp"
+            android:onClick="aboutYouOnClick"
             android:layout_margin="10dp"
             android:backgroundTint="@color/light_grey"
             app:cardCornerRadius="8dp"

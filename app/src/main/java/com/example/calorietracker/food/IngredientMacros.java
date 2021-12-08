@@ -128,7 +128,7 @@ public class IngredientMacros extends AppCompatActivity {
         } else if (calories >= 100000) {
             nutrient.setAmount(String.valueOf((int)(Float.parseFloat(nutrient.getAmount()) / 1000)));
         }
-        kCals = Integer.parseInt(nutrient.getAmount());
+        kCals = (int)Float.parseFloat(nutrient.getAmount());
     }
 
     private void addGramsOfFoodToDataBase(String gramsOfFood, IngredientInfo ingredientInfo, int kCals) {

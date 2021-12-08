@@ -3,6 +3,7 @@ package com.example.calorietracker;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
@@ -24,6 +25,7 @@ public class PersonalDataActivity extends AppCompatActivity {
     RadioButton male, female;
     FirebaseFirestore fStore;
     String userId;
+    Button goToStartingPage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,16 @@ public class PersonalDataActivity extends AppCompatActivity {
         male = findViewById(R.id.radioButtonMale);
         female = findViewById(R.id.radioButtonFemale);
         age = findViewById(R.id.editTextNumber);
+        goToStartingPage = findViewById(R.id.goToStartingPageButton);
+
+        goToStartingPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                Toast.makeText(PersonalDataActivity.this, "You've been logged out!", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(PersonalDataActivity.this, FirstPageActivity.class));
+            }
+        });
     }
 
     public void currentWeightOnClick(View view) {

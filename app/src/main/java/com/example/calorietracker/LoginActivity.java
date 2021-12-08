@@ -92,29 +92,33 @@ public class LoginActivity extends AppCompatActivity {
             documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
                 @Override
                 public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                    if (value.getString("firstName") == null || value.getString("lastName") == null || value.getString("gender") == null) {
-                        reload(new PersonalDataActivity());
-                        return;
-                    }
-                    if (value.getString("currentWeight") == null) {
-                        reload(new CurrentWeightActivity());
-                        return;
-                    }
-                    if (value.getString("targetWeight") == null) {
-                        reload(new TargetWeightActivity());
-                        return;
-                    }
-                    if (value.getString("height") == null) {
-                        reload(new HeightActivity());
-                        return;
-                    }
-                    if (value.getString("activityLevel") == null) {
-                        reload(new ExerciseLevelActivity());
-                        return;
-                    }
+//                    if (value.getString("firstName") == null || value.getString("lastName") == null || value.getString("gender") == null) {
+//                        reload(new PersonalDataActivity());
+//                        return;
+//                    }
+//                    if (value.getString("currentWeight") == null) {
+//                        reload(new CurrentWeightActivity());
+//                        return;
+//                    }
+//                    if (value.getString("targetWeight") == null) {
+//                        reload(new TargetWeightActivity());
+//                        return;
+//                    }
+//                    if (value.getString("height") == null) {
+//                        reload(new HeightActivity());
+//                        return;
+//                    }
+//                    if (value.getString("activityLevel") == null) {
+//                        reload(new ExerciseLevelActivity());
+//                        return;
+//                    }
                     if (value.getString("firstName") != null && value.getString("lastName") != null && value.getString("gender") != null
                             && value.getString("currentWeight") != null && value.getString("targetWeight") != null && value.getString("activityLevel") != null && value.getString("height") != null)
+                    {
                         reload(new DashboardActivity());
+                    }else{
+                        reload(new PersonalDataActivity());
+                    }
                 }
             });
 
