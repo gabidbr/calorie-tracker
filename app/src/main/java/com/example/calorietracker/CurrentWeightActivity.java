@@ -32,7 +32,7 @@ public class CurrentWeightActivity extends AppCompatActivity {
     }
 
     public void targetWeightOnClick(View view) {
-        if(weightEditText!=null){
+        if(weightEditText.getText().toString().length()!=0){
             String weightValue = weightEditText.getText().toString();
             if(mAuth.getCurrentUser()!=null){
                 userId = mAuth.getCurrentUser().getUid();
@@ -47,6 +47,10 @@ public class CurrentWeightActivity extends AppCompatActivity {
                 });
             }
             openTargetWeightActivity();
+        }else{
+            weightEditText.requestFocus();
+            weightEditText.setError("Field cannot be empty!");
+            Toast.makeText(CurrentWeightActivity.this,"Please insert data in each field!", Toast.LENGTH_SHORT).show();
         }
     }
 

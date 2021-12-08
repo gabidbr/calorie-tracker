@@ -31,7 +31,7 @@ public class FirstPageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_page);
 
-        TextView textView = findViewById(R.id.textView5);
+        TextView textView = findViewById(R.id.getStartedButton);
         mAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
 
@@ -59,11 +59,23 @@ public class FirstPageActivity extends AppCompatActivity {
                         return;
                     }
                     if (value.getString("firstName") != null && value.getString("lastName") != null && value.getString("gender") != null
-                            && value.getString("currentWeight") != null && value.getString("targetWeight") != null && value.getString("activityLevel") != null)
-                        reload(new DashboardActivity());
+                            && value.getString("currentWeight") != null && value.getString("targetWeight") != null && value.getString("activityLevel") != null){
+                        textView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                startActivity(new Intent(FirstPageActivity.this, DashboardActivity.class));
+                            }
+                        });
+                    }
                 }
             });
-
+        }else{
+            textView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(FirstPageActivity.this, StartActivity.class));
+                }
+            });
         }
     }
 

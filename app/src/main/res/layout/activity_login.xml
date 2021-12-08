@@ -29,6 +29,12 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/loginPassword"
         android:layout_marginTop="100dp"
-        android:backgroundTint="@color/background_blue_color"
+        android:backgroundTint="@color/dark_green"
         android:text="@string/login_to_calorie_crunch" />
+
+    <com.shobhitpuri.custombuttons.GoogleSignInButton
+        android:id="@+id/googleButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login" />
 </RelativeLayout>

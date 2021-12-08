@@ -3,6 +3,7 @@ package com.example.calorietracker.food;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -21,8 +22,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class FoodListActivity extends AppCompatActivity {
-    private final static String NUMBER = "3";
-    private final static String API_KEY = "7f44089524134491ae3b67763196e607";
+    private final String NUMBER = "10";
+    private final String API_KEY = "7f44089524134491ae3b67763196e607";
     RecyclerView recyclerView;
     EditText searchFoodEditText;
     ImageView searchFoodIcon;
@@ -38,7 +39,9 @@ public class FoodListActivity extends AppCompatActivity {
         searchFoodIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (searchFoodEditText.getText() == null) {
+                hideKeyboard();
+                if (searchFoodEditText.getText().toString().length() == 0) {
+                    searchFoodEditText.requestFocus();
                     Toast.makeText(FoodListActivity.this, "Please insert the food name", Toast.LENGTH_SHORT).show();
                 } else {
                     Call<IngredientListResponse> ingredientList = ApiClient.getIngredientService().getIngredientsList(searchFoodEditText.getText().toString(), NUMBER, API_KEY);
@@ -70,6 +73,11 @@ public class FoodListActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    private void hideKeyboard() {
+        InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
     }
 
     public void goToPreviousActivityOnClick(View view) {

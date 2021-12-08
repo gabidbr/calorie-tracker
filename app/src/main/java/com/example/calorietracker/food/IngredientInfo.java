@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 public class IngredientInfo {
     private String id;
     private String name;
+    private String image;
     @SerializedName("nutrition")
     private Nutrition nutrition;
 
@@ -30,5 +31,13 @@ public class IngredientInfo {
 
     public void setNutrition(Nutrition nutrition) {
         this.nutrition = nutrition;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

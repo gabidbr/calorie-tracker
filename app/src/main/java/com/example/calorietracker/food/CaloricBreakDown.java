@@ -5,6 +5,10 @@ import com.google.gson.annotations.SerializedName;
 public class CaloricBreakDown {
     @SerializedName("percentProtein")
     private float protein;
+    @SerializedName("percentFat")
+    private float fat;
+    @SerializedName("percentCarbs")
+    private float carbs;
 
     public float getProtein() {
         return protein;
@@ -29,9 +33,4 @@ public class CaloricBreakDown {
     public void setCarbs(float carbs) {
         this.carbs = carbs;
     }
-
-    @SerializedName("percentFat")
-    private float fat;
-    @SerializedName("percentCarbs")
-    private float carbs;
 }

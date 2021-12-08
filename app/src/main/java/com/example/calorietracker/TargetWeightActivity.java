@@ -32,7 +32,7 @@ public class TargetWeightActivity extends AppCompatActivity {
     }
 
     public void heightOnClick(View view) {
-        if(targetWeightEditText!=null){
+        if(targetWeightEditText.getText().toString().length()!=0){
             String weightValue = targetWeightEditText.getText().toString();
             if(mAuth.getCurrentUser()!=null){
                 userId = mAuth.getCurrentUser().getUid();
@@ -46,12 +46,16 @@ public class TargetWeightActivity extends AppCompatActivity {
                     }
                 });
             }
-            openExerciseLevelActivity();
+            openHeightActivity();
+        }else{
+            targetWeightEditText.requestFocus();
+            targetWeightEditText.setError("Field cannot be empty!");
+            Toast.makeText(TargetWeightActivity.this,"Please insert data in each field!", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void openExerciseLevelActivity() {
-        startActivity(new Intent(TargetWeightActivity.this, ExerciseLevelActivity.class));
+    private void openHeightActivity() {
+        startActivity(new Intent(TargetWeightActivity.this, HeightActivity.class));
         finish();
     }
 }

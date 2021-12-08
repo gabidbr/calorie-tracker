@@ -27,4 +27,9 @@
     <string name="here_is_a_list_of_the_most_healthy_foods_which_are_surprisingly_tasty">Here is a list of the most healthy foods, which are surprisingly tasty.</string>
     <string name="here_you_can_find_how_much_calories_you_ve_eaten_and_your_progress">Here you can find how much calories you\'ve eaten and your progress.</string>
     <string name="search_for_food">Search for food</string>
+    <string name="click_to_see_full_details">Click to see full details</string>
+    <string name="food_name">Food Name</string>
+    <string name="today">Today</string>
+    <string name="what_s_your_height">What\'s your height?</string>
+    <string name="cm">cm</string>
 </resources>

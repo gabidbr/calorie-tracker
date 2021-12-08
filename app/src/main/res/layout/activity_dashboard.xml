@@ -46,6 +46,7 @@
             android:textSize="30sp" />
 
         <androidx.cardview.widget.CardView
+            android:onClick="onTrackMealsClick"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_margin="10dp"
@@ -201,7 +202,7 @@
             android:id="@+id/logout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/background_blue_color"
+            android:backgroundTint="@color/dark_green"
             android:text="@string/logout"
             android:layout_margin="20dp"/>
     </LinearLayout>

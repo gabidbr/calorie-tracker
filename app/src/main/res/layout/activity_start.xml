@@ -21,7 +21,7 @@
         android:id="@+id/registerButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/background_blue_color"
+        android:backgroundTint="@color/dark_green"
         android:text="@string/i_am_new_to_calorie_crunch"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
@@ -33,24 +33,13 @@
         android:id="@+id/loginButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/background_blue_color"
+        android:backgroundTint="@color/dark_green"
         android:text="@string/i_already_have_an_account"
         app:layout_constraintVertical_bias="0.4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
         app:layout_constraintStart_toStartOf="@+id/guideline4"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
-    <com.shobhitpuri.custombuttons.GoogleSignInButton
-        android:id="@+id/googleButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-
-        app:layout_constraintEnd_toStartOf="@+id/guideline5"
-        app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.6" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline4"
@@ -72,4 +61,14 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="32dp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/watermelon_white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>
