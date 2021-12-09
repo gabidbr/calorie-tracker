@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DashboardActivity">
+    android:fitsSystemWindows="true"
+    tools:context=".DashboardActivity"
+    tools:openDrawer="start">
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/header"
+        app:menu="@menu/main_menu" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,29 +23,14 @@
         android:layout_margin="10dp"
         android:orientation="vertical">
 
-        <RelativeLayout
-            android:id="@+id/relativeLayout1"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar2"
             android:layout_width="match_parent"
-            android:layout_height="?android:actionBarSize">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:adjustViewBounds="true"
-                android:padding="15dp"
-                android:src="@drawable/left_arrow" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:adjustViewBounds="true"
-                android:padding="15dp"
-                android:src="@drawable/search" />
-        </RelativeLayout>
+            android:layout_height="wrap_content"
+            android:background="#00FFFFFF"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:navigationIcon="@drawable/hamburger_menu" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -46,11 +42,11 @@
             android:textSize="30sp" />
 
         <androidx.cardview.widget.CardView
-            android:onClick="onTrackMealsClick"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_margin="10dp"
             android:backgroundTint="@color/light_grey"
+            android:onClick="onTrackMealsClick"
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp">
 
@@ -98,11 +94,11 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/listOfFoods"
-            android:onClick="onListOfFoodsClick"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_margin="10dp"
             android:backgroundTint="@color/light_grey"
+            android:onClick="onListOfFoodsClick"
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp">
 
@@ -151,9 +147,9 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:onClick="aboutYouOnClick"
             android:layout_margin="10dp"
             android:backgroundTint="@color/light_grey"
+            android:onClick="aboutYouOnClick"
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp">
 
@@ -203,8 +199,8 @@
             android:id="@+id/logout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="20dp"
             android:backgroundTint="@color/dark_green"
-            android:text="@string/logout"
-            android:layout_margin="20dp"/>
+            android:text="@string/logout" />
     </LinearLayout>
-</ScrollView>
+</androidx.drawerlayout.widget.DrawerLayout>

@@ -10,7 +10,7 @@
         <entry key="..\:/Users/Gabi/AndroidStudioProjects/CalorieTracker/app/src/main/res/layout/activity_about.xml" value="0.24818840579710144" />
         <entry key="..\:/Users/Gabi/AndroidStudioProjects/CalorieTracker/app/src/main/res/layout/activity_add_ingredient_calories.xml" value="0.264" />
         <entry key="..\:/Users/Gabi/AndroidStudioProjects/CalorieTracker/app/src/main/res/layout/activity_add_new_ingredient.xml" value="0.12239583333333333" />
-        <entry key="..\:/Users/Gabi/AndroidStudioProjects/CalorieTracker/app/src/main/res/layout/activity_dashboard.xml" value="0.1" />
+        <entry key="..\:/Users/Gabi/AndroidStudioProjects/CalorieTracker/app/src/main/res/layout/activity_dashboard.xml" value="0.264" />
         <entry key="..\:/Users/Gabi/AndroidStudioProjects/CalorieTracker/app/src/main/res/layout/activity_exercise_level.xml" value="0.25" />
         <entry key="..\:/Users/Gabi/AndroidStudioProjects/CalorieTracker/app/src/main/res/layout/activity_first_page.xml" value="0.2" />
         <entry key="..\:/Users/Gabi/AndroidStudioProjects/CalorieTracker/app/src/main/res/layout/activity_food_list.xml" value="0.176" />
@@ -28,8 +28,10 @@
         <entry key="..\:/Users/Gabi/AndroidStudioProjects/CalorieTracker/app/src/main/res/layout/custom_ingredient_view.xml" value="0.264" />
         <entry key="..\:/Users/Gabi/AndroidStudioProjects/CalorieTracker/app/src/main/res/layout/fragment_about_you.xml" value="0.264" />
         <entry key="..\:/Users/Gabi/AndroidStudioProjects/CalorieTracker/app/src/main/res/layout/fragment_blank.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Gabi/AndroidStudioProjects/CalorieTracker/app/src/main/res/layout/header.xml" value="0.22644927536231885" />
         <entry key="..\:/Users/Gabi/AndroidStudioProjects/CalorieTracker/app/src/main/res/layout/personal_data.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Gabi/AndroidStudioProjects/CalorieTracker/app/src/main/res/layout/recyclerview_item.xml" value="0.1" />
+        <entry key="..\:/Users/Gabi/AndroidStudioProjects/CalorieTracker/app/src/main/res/menu/main_menu.xml" value="0.25416666666666665" />
       </map>
     </option>
   </component>

@@ -1,19 +1,29 @@
 package com.example.calorietracker;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.calorietracker.food.FoodListActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -22,9 +32,14 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DashboardActivity extends AppCompatActivity {
+public class DashboardActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     FirebaseFirestore fStore;
     FirebaseAuth mAuth;
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
+    Toolbar toolbar;
+    TextView emailTextViewHeader;
+
     private Button logout;
     private String targetCalories;
 
@@ -34,8 +49,23 @@ public class DashboardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dashboard);
         mAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
+        drawerLayout = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.nav_view);
+
+        toolbar = findViewById(R.id.toolbar2);
+        toolbar.setTitle("");
+        setSupportActionBar(toolbar);
+        navigationView.bringToFront();
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+        navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setCheckedItem(R.id.nav_home);
 
         if (mAuth.getCurrentUser() != null) {
+            emailTextViewHeader = navigationView.getHeaderView(0).findViewById(R.id.emailTextViewHeader);
+            emailTextViewHeader.setText(mAuth.getCurrentUser().getEmail());
             DocumentReference documentReference = fStore.collection("users").document(mAuth.getCurrentUser().getUid());
             documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
@@ -79,6 +109,15 @@ public class DashboardActivity extends AppCompatActivity {
                 startActivity(new Intent(DashboardActivity.this, FirstPageActivity.class));
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
     }
 
     private int getTargetCalories(Object currentWeight, Object targetWeight, Object age, double activityLevel, Object height) {
@@ -130,5 +169,45 @@ public class DashboardActivity extends AppCompatActivity {
 
     public void aboutYouOnClick(View view) {
         startActivity(new Intent(DashboardActivity.this, AboutActivity.class));
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.nav_home:
+                startActivity(new Intent(DashboardActivity.this, DashboardActivity.class));
+                break;
+            case R.id.nav_food:
+                startActivity(new Intent(DashboardActivity.this, ListOfIngredientsActivity.class));
+                break;
+            case R.id.nav_about:
+                startActivity(new Intent(DashboardActivity.this, AboutActivity.class));
+                break;
+            case R.id.nav_logout:
+                AlertDialog.Builder builder = new AlertDialog.Builder(DashboardActivity.this);
+                builder.setMessage("Do you want to logout?")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                FirebaseAuth.getInstance().signOut();
+                                Toast.makeText(DashboardActivity.this, "You've been logged out!", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(DashboardActivity.this, FirstPageActivity.class));
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                                Toast.makeText(DashboardActivity.this, "No action", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.setTitle("Logout");
+                alertDialog.show();
+                break;
+        }
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
     }
 }

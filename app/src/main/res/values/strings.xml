@@ -24,8 +24,8 @@
     <string name="logout">Logout</string>
     <string name="or">or</string>
     <string name="track_meals_and_see_how_much_you_re_eating">Track meals and see how much you\'re eating</string>
-    <string name="here_is_a_list_of_the_most_healthy_foods_which_are_surprisingly_tasty">Here is a list of the most healthy foods, which are surprisingly tasty.</string>
-    <string name="here_you_can_find_how_much_calories_you_ve_eaten_and_your_progress">Here you can find how much calories you\'ve eaten and your progress.</string>
+    <string name="here_is_a_list_of_the_most_healthy_foods_which_are_surprisingly_tasty">Here is the list of the healthy foods you ate today</string>
+    <string name="here_you_can_find_how_much_calories_you_ve_eaten_and_your_progress">Here you can find personal info and your progress.</string>
     <string name="search_for_food">Search for food</string>
     <string name="click_to_see_full_details">Click to see full details</string>
     <string name="food_name">Food Name</string>
@@ -36,4 +36,6 @@
     <string name="add_ingredient">Add Ingredient</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>
