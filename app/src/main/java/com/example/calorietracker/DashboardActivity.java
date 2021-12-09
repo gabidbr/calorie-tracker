@@ -72,22 +72,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                     if (task.isSuccessful()) {
                         try {
-                            DocumentSnapshot documentSnapshot = task.getResult();
-                            Object currentWeight = documentSnapshot.get("currentWeight");
-                            Object targetWeight = documentSnapshot.get("targetWeight");
-                            Object age = documentSnapshot.get("age");
-                            double activityLevel = getActivityLevel(documentSnapshot);
-                            Object height = documentSnapshot.get("height");
-                            targetCalories = String.valueOf(getTargetCalories(currentWeight, targetWeight, age, activityLevel, height));
-                            System.out.println(targetCalories);
-                            Map<String, Object> user = new HashMap<>();
-                            user.put("targetCalories", targetCalories);
-                            documentReference.update(user).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void unused) {
-                                    Toast.makeText(DashboardActivity.this, "Target Calories added for user", Toast.LENGTH_SHORT).show();
-                                }
-                            });
+                            addTargetCaloriesToFirebase(task, documentReference);
                         } catch (Exception e) {
                             Log.e("Dash", "get failed" + e.getMessage());
                         }
@@ -109,6 +94,26 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
                 startActivity(new Intent(DashboardActivity.this, FirstPageActivity.class));
             }
         });
+    }
+
+    private void addTargetCaloriesToFirebase(@NonNull Task<DocumentSnapshot> task, DocumentReference documentReference) {
+        DocumentSnapshot documentSnapshot = task.getResult();
+        if(documentSnapshot.get("targetCalories")==null){
+            Object currentWeight = documentSnapshot.get("currentWeight");
+            Object targetWeight = documentSnapshot.get("targetWeight");
+            Object age = documentSnapshot.get("age");
+            double activityLevel = getActivityLevel(documentSnapshot);
+            Object height = documentSnapshot.get("height");
+            targetCalories = String.valueOf(getTargetCalories(currentWeight, targetWeight, age, activityLevel, height));
+            Map<String, Object> user = new HashMap<>();
+            user.put("targetCalories", targetCalories);
+            documentReference.update(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
+                    Log.e("Target calories", "added calories for user");
+                }
+            });
+        }
     }
 
     @Override

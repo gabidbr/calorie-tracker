@@ -132,7 +132,6 @@ public class IngredientMacros extends AppCompatActivity {
     }
 
     private void addGramsOfFoodToDataBase(String gramsOfFood, IngredientInfo ingredientInfo, int kCals) {
-        System.out.println(ingredientInfo.getId() + "i" + ingredientInfo.getId() + ingredientInfo.getName() + Float.parseFloat(gramsOfFood));
         Ingredient ingredient = new Ingredient(ingredientInfo.getId(),
                 ingredientInfo.getName(), (int)(Float.parseFloat(gramsOfFood) * kCals / 100), firebaseAuth.getCurrentUser().getUid(), Calendar.getInstance().getTime());
         IngredientViewModel ingredientViewModel = new ViewModelProvider(this).get(IngredientViewModel.class);

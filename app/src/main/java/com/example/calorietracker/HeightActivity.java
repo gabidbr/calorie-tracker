@@ -30,8 +30,6 @@ public class HeightActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
         heightEditText = findViewById(R.id.height);
-        //TODO sa leg height de firebase si sa adaug acolo respectiv sa
-        // vad atunci cand fac login si ies din activitate cum fac, adica pe signup sa nu treaca de acea pagina
     }
 
     public void dashboardOnClick(View view) {
