@@ -99,4 +99,7 @@ public class ExerciseLevelActivity extends AppCompatActivity {
         finish();
     }
 
+    public void goToPreviousActivityOnClick(View view) {
+        finish();
+    }
 }

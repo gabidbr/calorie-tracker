@@ -72,27 +72,35 @@ public class PersonalDataActivity extends AppCompatActivity {
             } else {
                 if (male.isChecked()) gender = "male";
                 else if (female.isChecked()) gender = "female";
-                if (mAuth.getCurrentUser() != null) {
-                    userId = mAuth.getCurrentUser().getUid();
-                    DocumentReference documentReference = fStore.collection("users").document(userId);
-                    Map<String, Object> user = new HashMap<>();
-                    user.put("firstName", firstNameText);
-                    user.put("lastName", lastNameText);
-                    user.put("gender", gender);
-                    user.put("age", ageNumber);
-                    documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void unused) {
-                            Toast.makeText(PersonalDataActivity.this, "User Profile created for user" + userId, Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                    Intent currentWeightActivity = new Intent(this, CurrentWeightActivity.class);
-                    startActivity(currentWeightActivity);
-                }
+                addUserDataToFirebase(firstNameText, lastNameText, ageNumber, gender);
             }
         } catch (Exception e) {
             Toast.makeText(PersonalDataActivity.this, "Error!", Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+    private void addUserDataToFirebase(String firstNameText, String lastNameText, String ageNumber, String gender) {
+        if (mAuth.getCurrentUser() != null) {
+            userId = mAuth.getCurrentUser().getUid();
+            DocumentReference documentReference = fStore.collection("users").document(userId);
+            Map<String, Object> user = new HashMap<>();
+            user.put("firstName", firstNameText);
+            user.put("lastName", lastNameText);
+            user.put("gender", gender);
+            user.put("age", ageNumber);
+            documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
+                    Toast.makeText(PersonalDataActivity.this, "User Profile created for user" + userId, Toast.LENGTH_SHORT).show();
+                }
+            });
+            Intent currentWeightActivity = new Intent(this, CurrentWeightActivity.class);
+            startActivity(currentWeightActivity);
+        }
+    }
+
+    public void goToPreviousActivityOnClick(View view) {
+        finish();
     }
 }

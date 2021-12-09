@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.example.calorietracker.fragment.BlankFragment;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,5 +23,9 @@ public class AboutActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.thePlaceHolder, blankFragment);
         fragmentTransaction.commit();
+    }
+
+    public void goToPreviousActivityOnClick(View view) {
+        finish();
     }
 }

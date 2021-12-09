@@ -6,17 +6,38 @@
     android:layout_height="match_parent"
     tools:context=".AboutActivity">
 
+    <RelativeLayout
+        android:id="@+id/relativeLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="?android:actionBarSize"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:adjustViewBounds="true"
+            android:onClick="goToPreviousActivityOnClick"
+            android:padding="15dp"
+            android:src="@drawable/left_arrow" />
+    </RelativeLayout>
+
     <TextView
         android:id="@+id/aboutYouText"
         android:layout_width="0dp"
-        android:layout_marginTop="50dp"
         android:layout_height="wrap_content"
-        android:text="About you"
+        android:layout_marginTop="50dp"
+        android:text="@string/about_you"
+        android:textAlignment="center"
+        android:background="@color/light_green"
+        android:padding="8dp"
         android:textColor="@android:color/black"
-        android:textSize="32dp"
+        android:textSize="32sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:textAlignment="center"
         app:layout_constraintTop_toTopOf="@id/guideline8" />
 
     <FrameLayout
@@ -44,6 +65,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_begin="32dp" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline10"
         android:layout_width="wrap_content"

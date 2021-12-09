@@ -172,4 +172,8 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
     }
+
+    public void goToPreviousActivityOnClick(View view) {
+        finish();
+    }
 }

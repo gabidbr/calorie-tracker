@@ -58,4 +58,8 @@ public class TargetWeightActivity extends AppCompatActivity {
         startActivity(new Intent(TargetWeightActivity.this, HeightActivity.class));
         finish();
     }
+
+    public void goToPreviousActivityOnClick(View view) {
+        finish();
+    }
 }

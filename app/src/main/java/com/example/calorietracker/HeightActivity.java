@@ -61,4 +61,8 @@ public class HeightActivity extends AppCompatActivity {
         startActivity(new Intent(HeightActivity.this, ExerciseLevelActivity.class));
         finish();
     }
+
+    public void goToPreviousActivityOnClick(View view) {
+        finish();
+    }
 }

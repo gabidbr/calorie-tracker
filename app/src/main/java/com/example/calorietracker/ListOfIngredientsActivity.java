@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -34,58 +35,15 @@ import java.util.List;
 public class ListOfIngredientsActivity extends AppCompatActivity {
 
     public static final int NEW_INGREDIENT_ACTIVITY_REQUEST_CODE = 1;
-    TextView sumCaloriesTextView;
+    TextView sumCaloriesTextView, targetCaloriesTextView;
     CircularProgressBar circularProgressBar;
     FloatingActionButton floatingActionButton;
     RecyclerView recyclerView;
+    CardView caloriesCardView;
     private FirebaseAuth firebaseAuth;
     private FirebaseFirestore fStore;
     private IngredientViewModel mIngredientViewModel;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_ingredients);
-        firebaseAuth = FirebaseAuth.getInstance();
-        fStore = FirebaseFirestore.getInstance();
-        sumCaloriesTextView = findViewById(R.id.sumCaloriesTextView);
-        circularProgressBar = findViewById(R.id.circularProgressBar);
-        floatingActionButton = findViewById(R.id.fab);
-        recyclerView = findViewById(R.id.recyclerview);
-        final IngredientListAdapter adapter = new IngredientListAdapter(this);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
-        mIngredientViewModel = new ViewModelProvider(this).get(IngredientViewModel.class);
-
-        mIngredientViewModel.getAllIngredients(firebaseAuth.getCurrentUser().getUid()).observe(this, new Observer<List<Ingredient>>() {
-            @Override
-            public void onChanged(@Nullable final List<Ingredient> ingredients) {
-                setVisibility(ingredients, sumCaloriesTextView);
-                adapter.setIngredients(ingredients);
-                setVisibility(ingredients, circularProgressBar);
-                circularProgressBar();
-            }
-        });
-
-        mIngredientViewModel.getCaloriesFromAllIngredients(firebaseAuth.getCurrentUser().getUid()).observe(this, new Observer<Integer>() {
-            @Override
-            public void onChanged(Integer aInteger) {
-                sumCaloriesTextView.setText(String.format("%s kCals", aInteger));
-            }
-        });
-
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ListOfIngredientsActivity.this, FoodListActivity.class);
-                startActivityForResult(intent, NEW_INGREDIENT_ACTIVITY_REQUEST_CODE);
-            }
-        });
-
-    }
-
-    ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.RIGHT|ItemTouchHelper.LEFT) {
+    ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
         @Override
         public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
             return false;
@@ -120,7 +78,75 @@ public class ListOfIngredientsActivity extends AppCompatActivity {
         }
     };
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_list_ingredients);
+        firebaseAuth = FirebaseAuth.getInstance();
+        fStore = FirebaseFirestore.getInstance();
+        sumCaloriesTextView = findViewById(R.id.sumCaloriesTextView);
+        targetCaloriesTextView = findViewById(R.id.targetCaloriesTextView);
+        circularProgressBar = findViewById(R.id.circularProgressBar);
+        caloriesCardView = findViewById(R.id.caloriesCardView);
+        floatingActionButton = findViewById(R.id.fab);
+        recyclerView = findViewById(R.id.recyclerview);
+        final IngredientListAdapter adapter = new IngredientListAdapter(this);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
+        mIngredientViewModel = new ViewModelProvider(this).get(IngredientViewModel.class);
 
+        mIngredientViewModel.getAllIngredients(firebaseAuth.getCurrentUser().getUid()).observe(this, new Observer<List<Ingredient>>() {
+            @Override
+            public void onChanged(@Nullable final List<Ingredient> ingredients) {
+                setVisibility(ingredients, sumCaloriesTextView);
+                setVisibility(ingredients, caloriesCardView);
+                setVisibility(ingredients, circularProgressBar);
+                adapter.setIngredients(ingredients);
+                circularProgressBar();
+            }
+        });
+
+        setTargetCaloriesFromFirebase();
+
+        mIngredientViewModel.getCaloriesFromAllIngredients(firebaseAuth.getCurrentUser().getUid()).observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer aInteger) {
+                sumCaloriesTextView.setText(String.format("Actual: %s kCals", aInteger));
+            }
+        });
+
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ListOfIngredientsActivity.this, FoodListActivity.class);
+                startActivityForResult(intent, NEW_INGREDIENT_ACTIVITY_REQUEST_CODE);
+            }
+        });
+
+    }
+
+    private void setTargetCaloriesFromFirebase() {
+        if (firebaseAuth.getCurrentUser() != null) {
+            DocumentReference documentReference = fStore.collection("users").document(firebaseAuth.getCurrentUser().getUid());
+            documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        try {
+                            DocumentSnapshot documentSnapshot = task.getResult();
+                            Object targetCalories = documentSnapshot.get("targetCalories");
+                            targetCaloriesTextView.setText(String.format("Target: %s kCals", targetCalories.toString()));
+                        } catch (Exception e) {
+                            Log.e("TargetCalories", "get failed" + e.getMessage());
+                        }
+                    } else {
+                        Log.e("TargetCalories", "get failed with", task.getException());
+                    }
+                }
+            });
+        }
+    }
 
     private void setVisibility(List<Ingredient> ingredientList, View view) {
         if (ingredientList.isEmpty()) {
@@ -156,9 +182,8 @@ public class ListOfIngredientsActivity extends AppCompatActivity {
         circularProgressBar.setProgressDirection(CircularProgressBar.ProgressDirection.TO_RIGHT);
     }
 
-    //TODO Customize toolbar
-    //TODO Make Navigation drawer
-    //TODO Add TargetCalories, ma folosesc de ceea ce am, mai adaug Activity pt height si apoi in
-    // functie de diferenta dintre current height si target height inmultesc cu 0.9 sau 1.1 sau 1.05...
-    //TODO Validare form si sa nu ne lase sa trecem din Activity in alta fara campuri completate
+    public void goToPreviousActivityOnClick(View view) {
+        startActivity(new Intent(ListOfIngredientsActivity.this, DashboardActivity.class));
+        finish();
+    }
 }

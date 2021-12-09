@@ -80,7 +80,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/track_meals_and_see_how_much_you_re_eating" />
+                        android:text="@string/cardview_1_text" />
                 </LinearLayout>
 
                 <ImageView
@@ -132,7 +132,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/here_is_a_list_of_the_most_healthy_foods_which_are_surprisingly_tasty" />
+                        android:text="@string/cardview_2_text" />
                 </LinearLayout>
 
                 <ImageView
@@ -183,7 +183,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/here_you_can_find_how_much_calories_you_ve_eaten_and_your_progress" />
+                        android:text="@string/cardview_3_text" />
                 </LinearLayout>
 
                 <ImageView
