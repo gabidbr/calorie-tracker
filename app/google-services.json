@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "858866418383",
+    "firebase_url": "https://calorietracker-332516-default-rtdb.firebaseio.com",
+    "project_id": "calorietracker-332516",
+    "storage_bucket": "calorietracker-332516.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:858866418383:android:39e70049d07f0c32e92dba",
+        "android_client_info": {
+          "package_name": "com.example.calorietracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "858866418383-g5ung84ccfptp5aqokhimj78inbbu21n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.calorietracker",
+            "certificate_hash": "5330f068da1a7b08028cf898be01d1456e2f9f9c"
+          }
+        },
+        {
+          "client_id": "858866418383-a2te2rucog1k7iuboac61g5g4hu2fvu4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZYp2aWATkpAj_wpkA5OBFSKSv0eWIvGk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "858866418383-a2te2rucog1k7iuboac61g5g4hu2fvu4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
