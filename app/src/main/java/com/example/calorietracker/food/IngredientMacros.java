@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -105,14 +106,18 @@ public class IngredientMacros extends AppCompatActivity {
         List<Nutrient> nutrients = ingredientInfo.getNutrition().getNutrients();
         StringBuilder nutrientsString = new StringBuilder();
         for (Nutrient nutrient : nutrients) {
-            if (nutrient.getTitle().equals("Calories")) {
-                if (nutrient.getUnit().equals("kcal")) {
-                    int v =(int)Float.parseFloat(nutrient.getAmount());
-                    calculateKcalsValue(nutrient, v);
-                    caloriesText.setText(String.format("%s kCal", kCals));
+            try {
+                if (nutrient.getName().equals("Calories")) {
+                    if (nutrient.getUnit().equals("kcal")) {
+                        int v = (int) Float.parseFloat(nutrient.getAmount());
+                        calculateKcalsValue(nutrient, v);
+                        caloriesText.setText(String.format("%s kCal", kCals));
+                    }
+                } else {
+                    nutrientsString.append(nutrient.getName()).append(" ").append(nutrient.getAmount()).append(nutrient.getUnit()).append("\n");
                 }
-            } else {
-                nutrientsString.append(nutrient.getTitle()).append(" ").append(nutrient.getAmount()).append(nutrient.getUnit()).append("\n");
+            }catch (Exception e){
+                Toast.makeText(IngredientMacros.this,"No data for this product.", Toast.LENGTH_SHORT).show();
             }
         }
         nutrientsText.setText(nutrientsString);
